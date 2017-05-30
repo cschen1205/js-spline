@@ -77,8 +77,41 @@ var jsspline = jsspline || {};
         return point;
     };
     
-    Bezier = function() {
-        
+    Bezier = function(config) {
+        var config = config || {};
+        if(!config.steps){
+            config.steps = 100;
+        }
+        this.steps = config.steps;
+        this.way_points = [];
+        this.nodes = [];
+        this.distances = [];
+    };
+    
+    Bezier.prototype.addWayPoint = function(pt) {
+        this.way_points.push(new jss.Vector(pt.x, pt.y, pt.z));
+        if(this.way_points.length > 3) {
+            var j = this.way_points.length - 1;
+            if(j % 2 == 0) return;
+            
+            for(var i=0; i < this.steps; ++i){
+                var u = i * 1.0 / this.steps;
+                var node;
+                if(j == 3){
+                    node = this.interpolate(u, this.way_points[j-3], this.way_points[j-2], this.way_points[j-1], this.way_points[j]);
+                } else {
+                    k = j - 2;
+                    pt4 = this.way_points[k].scale(2).minus(this.way_points[k-1]);
+                    node = this.interpolate(u, this.way_points[pt], pt4, this.way_points[pt+1], this.way_points[pt+2]);
+                }
+                var distance = 0;
+                if(this.nodes.length > 0){
+                    distance = this.distances[this.distances.length-1] + node.distance(this.nodes[this.nodes.length-1]);
+                }
+                this.nodes.push(node);
+                this.distances.push(distance);
+            }
+        }
     };
     
     Bezier.interpolate = function(u, pt1, pt2, pt3, pt4){
