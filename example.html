@@ -1,0 +1,40 @@
+<html>
+<head>
+<script src="src/jsspline.js" type="text/javascript"></script>
+</head>
+    
+<body>
+<canvas id="canvas-bspline" width="900" height="500"></canvas>   
+    
+    
+    <script>
+      var canvas = document.getElementById('canvas-bspline');
+      var context = canvas.getContext('2d');
+        
+      var bspline = new jsspline.BSpline({
+          steps: 100
+      });
+      for(var i=0; i < 20; ++i){
+          var x = i * 50;
+          var y = Math.sin(x * Math.PI / 200) * 100;
+          bspline.addWayPoint({x : x, y: y, z: 0});
+      }
+
+      context.beginPath();
+      console.log("interpolated: " + bspline.nodes.length);
+      for(var i = 1; i < bspline.nodes.length; ++i){
+          var x1 = bspline.nodes[i-1].x;
+          var y1 = bspline.nodes[i-1].y;
+          var x2 = bspline.nodes[i].x;
+          var y2 = bspline.nodes[i].y;
+          
+          context.moveTo(x1, y1);
+          context.lineTo(x2, y2);
+          console.log(x1 + ", " + y1);
+      }
+      context.stroke();
+    </script>
+</body>
+    
+
+</html>

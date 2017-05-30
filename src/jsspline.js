@@ -127,6 +127,7 @@ var jsspline = jsspline || {};
 
 })(jsspline);
 
+var module = module || {};
 if(module) {
 	module.exports = jsspline;
 }
