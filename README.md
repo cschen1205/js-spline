@@ -1,6 +1,16 @@
 # js-spline
 Package provides javascript implementation of algorithms that generate various types of splines from a set of control way points
 
+# Features
+
+* Bezier curve
+* BSpline curve
+* Catmull-Rom curve (WIP)
+* NURB (WIP)
+
+# Install
+
+npm install js-spline
 
 # Usage
 
@@ -73,3 +83,7 @@ curve.nodes[2].z;
 // distance from the first node
 curve.distances[2]
 ```
+
+### Usage in HTML
+
+Please refers to the example.html for how to use the splines in the HTML page.

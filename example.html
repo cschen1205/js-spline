@@ -24,15 +24,17 @@
           steps: 100 
       });
         
+      
       for(var i=0; i < 20; ++i){
           var x = i * 50;
           var y = Math.sin(x * Math.PI / 200) * 100 + 140;
           bspline.addWayPoint({x : x, y: y, z: 0});
           bezier.addWayPoint({x : x, y: y, z: 0});
+          context_bezier.fillRect(x, y, 5, 5);
+          context_bspline.fillRect(x, y, 5, 5);
       }
 
       context_bspline.beginPath();
-      
       console.log("bspline interpolated: " + bspline.nodes.length);
       for(var i = 1; i < bspline.nodes.length; ++i){
           var x1 = bspline.nodes[i-1].x;
