@@ -102,7 +102,7 @@ var jsspline = jsspline || {};
                 } else {
                     k = j - 2;
                     pt4 = this.way_points[k].scale(2).minus(this.way_points[k-1]);
-                    node = this.interpolate(u, this.way_points[pt], pt4, this.way_points[pt+1], this.way_points[pt+2]);
+                    node = this.interpolate(u, this.way_points[k], pt4, this.way_points[k+1], this.way_points[k+2]);
                 }
                 var distance = 0;
                 if(this.nodes.length > 0){
@@ -114,7 +114,7 @@ var jsspline = jsspline || {};
         }
     };
     
-    Bezier.interpolate = function(u, pt1, pt2, pt3, pt4){
+    Bezier.prototype.interpolate = function(u, pt1, pt2, pt3, pt4){
         var point = pt1.scale(-1).add(pt2.scale(3)).minus(pt3.scale(3)).add(pt4).scale(u*u*u);
         point = point.add(pt1.scale(3).minus(pt2.scale(6)).add(pt3.scale(3)).scale(u*u));
         point = point.add(pt1.scale(-3).add(pt2.scale(3)).scale(u));
