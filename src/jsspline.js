@@ -73,7 +73,7 @@ var jsspline = jsspline || {};
         var point = pt1.scale(-1).add(pt2.scale(3)).minus(pt3.scale(3)).add(pt4).scale(u*u*u / 6);
         point = point.add(pt1.scale(3).minus(pt2.scale(6)).add(pt3.scale(3)).scale(u*u / 6));
         point = point.add(pt1.scale(-3).add(pt2.scale(3)).scale(u / 6));
-        point = point.add(pt1.add(pt2.scale(4)).add(pt3)).scale(1.0 / 6);
+        point = point.add(pt1.add(pt2.scale(4)).add(pt3).scale(1.0 / 6));
         return point;
     };
     
